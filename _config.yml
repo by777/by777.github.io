@@ -28,7 +28,7 @@ twitter: '@still_loops' # Add your Twitter handle
 mailchimp: # Add your MailChimp form identifier.
 
 # Disqus
-discus_identifier: mr-brown # Add your discus identifier
+discus_identifier: # mr-brown — disabled, add your own Disqus ID here
 
 # Tracker
 analytics: # Google Analytics
