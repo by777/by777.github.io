@@ -1,17 +1,16 @@
 ---
 layout: post
-title:  I meet the sunset
-date:   2017-08-24 13:32:20 +0300
-description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
+title: 邂逅日落
+date: 2017-08-24 13:32:20 +0300
+description: 那天傍晚，我在山顶遇见了此生最美的日落。 # Add post description (optional)
 img: post-2.jpg # Add image post (optional)
 tags: [Blog, Sunset]
-author: # Add name author (optional)
+author: Bai Qi
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+在 `_posts` 目录下添加文章，按 `YYYY-MM-DD-文章标题.markdown` 的格式命名文件，并包含必要的 Front Matter 元数据，就可以发布新文章了。
 
-Jekyll also offers powerful support for code snippets:
+Jekyll 对代码高亮也有很好的支持：
 
 {% highlight ruby %}
 def print_hi(name)
@@ -21,7 +20,7 @@ print_hi('Tom')
 #=> prints 'Hi, Tom' to STDOUT.
 {% endhighlight %}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+更多关于 Jekyll 的使用技巧，请查阅 [Jekyll 官方文档][jekyll-docs]。如有 Bug 或功能需求，请在 [Jekyll GitHub 仓库][jekyll-gh] 提交。有任何问题，可以在 [Jekyll Talk][jekyll-talk] 上讨论。
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 [jekyll-gh]:   https://github.com/jekyll/jekyll

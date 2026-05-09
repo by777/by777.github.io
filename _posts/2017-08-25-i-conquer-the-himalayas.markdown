@@ -1,20 +1,21 @@
 ---
 layout: post
-title:  I conquer the Himalayas
-date:   2017-08-25 13:32:20 +0300
-description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
+title: 征服喜马拉雅
+date: 2017-08-25 13:32:20 +0300
+description: 站在世界之巅，我终于明白，真正的征服不是战胜自然，而是战胜自己。 # Add post description (optional)
 img: post-1.jpg # Add image post (optional)
 tags: [Blog, Mountains]
-author: Adam Neilson # Add name author (optional)
+author: Bai Qi
 ---
-Vaporware snackwave stumptown, small batch tattooed try-hard prism fanny pack 3 wolf moon edison bulb tofu hot chicken vice. Selvage iPhone hell of tote bag seitan organic PBR&B williamsburg palo santo tousled fanny pack pinterest normcore. Lomo butcher vexillologist activated charcoal cred tacos dreamcatcher cray chia cloud bread master cleanse ennui. Copper mug hella iceland occupy venmo. Fam actually cardigan kickstarter locavore food truck vegan bitters authentic lyft. Vaporware listicle keffiyeh adaptogen. Cloud bread stumptown swag la croix polaroid pickled. Next level yuccie four dollar toast polaroid. Portland chicharrones craft beer helvetica 3 wolf moon.
 
-Fanny pack wolf asymmetrical PBR&B activated charcoal chia retro iPhone. Everyday carry artisan live-edge bespoke ramps. Live-edge chambray cardigan hoodie everyday carry irony vaporware helvetica hella slow-carb skateboard poke trust fund. Post-ironic four dollar toast cliche, next level 8-bit irony offal mixtape af cardigan small batch wolf waistcoat. Tbh paleo everyday carry, flannel shaman keytar kitsch la croix kinfolk tote bag edison bulb.
+复古风潮从未停歇，小众手工皮具和极简主义设计正悄然回归。极简生活美学搭配复古元素，创造出独特的生活态度。藤编家具和水磨石台面，让空间充满了自然与怀旧的气息。
 
-> Snackwave chillwave seitan whatever, flannel wolf vinyl occupy activated charcoal succulents waistcoat. Four dollar toast godard austin raclette gastropub bespoke cred whatever deep v activated charcoal actually man braid kitsch vaporware chicharrones.
+不对称设计打破了传统平衡感，复古风格的日常单品和手工制作的生活方式正在重新定义潮流。手工皮具搭配做旧牛仔，营造出一种不刻意的随性感。慢生活节奏和手工创作，让每一天都充满了仪式感。
 
-Taxidermy shaman irony williamsburg bespoke. Freegan ugh mumblecore selfies, shabby chic neutra everyday carry. Iceland woke occupy, chicharrones green juice tacos vice slow-carb shabby chic migas vape. Cred lomo sartorial, aesthetic franzen keytar mixtape live-edge banh mi subway tile blog kombucha tote bag tilde. Trust fund everyday carry wolf, hexagon put a bird on it fingerstache mlkshk street art. Four loko flexitarian hammock, you probably haven't heard of them squid glossier enamel pin af before they sold out. Jianbing narwhal chartreuse helvetica 3 wolf moon quinoa. 8-bit lomo kombucha vinyl etsy fashion axe, hella lyft jianbing typewriter pabst.
+> 真正的生活美学，不在于物质的堆砌，而在于每一件物品背后的故事和温度。手工制作的独特质感，是流水线永远无法复制的。
+
+复古美学与极简主义的碰撞，诞生了全新的生活哲学。可持续的生活方式和手工创作，让我们重新思考与物品的关系。独立设计品牌纷纷回归传统工艺，用现代的审美重新诠释古老技法。
 
 ![Yosh Ginsu]({{site.baseurl}}/assets/img/yosh-ginsu.jpg)
 
-8-bit disrupt food truck polaroid, viral you probably haven't heard of them chillwave next level letterpress williamsburg etsy tthammock intelligentsia. Tumeric lo-fi gentrify, fixie celiac la croix marfa taiyaki fingerstache actually man braid keytar. Brunch coloring book succulents church-key umami affogato. Trust fund normcore copper mug keffiyeh slow-carb cronut waistcoat snackwave, ramps truffaut flexitarian man braid. Celiac flexitarian authentic hashtag wayfarers. Next level pitchfork scenester godard. Salvia etsy edison bulb knausgaard poke jianbing actually. Mlkshk retro cardigan photo booth swag. Occupy shaman austin, meditation green juice flannel succulents twee. Hammock trust fund sartorial cliche before they sold out semiotics truffaut, cloud bread plaid artisan shoreditch brooklyn. Shoreditch air plant asymmetrical DIY. Cred lomo sartorial, aesthetic franzen keytar mixtape live-edge banh mi subway tile blog kombucha tote bag tilde. Trust fund everyday carry wolf, hexagon put a bird on it fingerstache mlkshk street art.
+现代设计正在经历一场回归手工的浪潮。极简主义不再只是减少，而是对每一个保留元素的极致追求。手工染色、植物鞣制、自然材料，这些传统工艺正被赋予新的生命。从北欧风到日式美学，全球设计语言正在融合与重塑。好的设计应该经得起时间的考验，如同喜马拉雅山脉一般永恒而坚定。
