@@ -22,4 +22,44 @@
 	<link rel="stylesheet" href="{{ "/assets/fonts/font-awesome/css/font-awesome.min.css" | prepend: site.baseurl }}">
 	<!-- Styles -->
 	<link rel="stylesheet" href="{{ "/assets/css/main.css" | prepend: site.baseurl }}">
+	<!-- MathJax -->
+	<script>
+	MathJax = {
+	  tex: {
+		inlineMath: [['$', '$'], ['\\(', '\\)']],
+		displayMath: [['$$', '$$'], ['\\[', '\\]']],
+		processEscapes: true
+	  },
+	  options: {
+		skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+	  }
+	};
+	</script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<style>
+	/* Table styles */
+	.page-content table {
+	  border-collapse: collapse;
+	  width: 100%;
+	  margin: 1rem 0;
+	}
+	.page-content th,
+	.page-content td {
+	  border: 1px solid #ddd;
+	  padding: 8px 12px;
+	  text-align: left;
+	}
+	.page-content th {
+	  background: #f5f5f5;
+	  font-weight: 600;
+	}
+	/* Code block improvements */
+	figure.highlight {
+	  margin: 1rem 0;
+	}
+	.highlight pre {
+	  padding: 16px;
+	  border-radius: 4px;
+	}
+	</style>
 </head>
