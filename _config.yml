@@ -46,3 +46,15 @@ plugins:
 
 include: [_pages]
 exclude: ["node_modules", "gulpfile.js", "package.json", "yarn.lock"]
+
+collections:
+  runoob:
+    output: true
+    permalink: /runoob/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: runoob
+    values:
+      layout: post

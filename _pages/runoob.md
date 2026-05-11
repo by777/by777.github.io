@@ -1,12 +1,11 @@
 ---
 layout: home-page
-title: Runoob C++ 笔记
+title: Runoob C++ STL 笔记
 permalink: /runoob/
 ---
 
 <ol class="post-card-box clearfix">
-{% for post in site.posts %}
-  {% if post.tags contains 'runoob' %}
+{% for post in site.runoob %}
   <li>
     <div class="post-card">
       <a href="{{post.url | prepend: site.baseurl}}" class="post-card-image" style="background-image: url( {{ "/assets/img/" | prepend: site.baseurl | append : post.img}} )">
@@ -19,6 +18,5 @@ permalink: /runoob/
       </div>
     </div>
   </li>
-  {% endif %}
 {% endfor %}
 </ol>
