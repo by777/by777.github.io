@@ -34,7 +34,7 @@ discus_identifier: # mr-brown — disabled, add your own Disqus ID here
 analytics: # Google Analytics
 
 # Paginate
-paginate: 6
+paginate: 24
 paginate_path: /page:num/
 
 # Build settings
