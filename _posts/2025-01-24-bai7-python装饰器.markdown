@@ -1,0 +1,134 @@
+---
+layout: post
+title: python装饰器
+date: 2025-01-24 14:51:00 +0800
+description: python装饰器
+img: post-3.jpg
+tags: [cnblogs]
+author: Bai Qi
+---
+
+在 Python 中，装饰器（Decorator）是一种强大且灵活的工具，它允许你在不修改已有函数或类的源代码的情况下，对它们的功能进行扩展和增强。下面从装饰器的概念、语法、工作原理、使用场景等方面详细介绍 Python 的装饰器。
+
+### 概念
+
+装饰器本质上是一个函数，它接受一个函数或类作为输入，并返回一个新的函数或类。这个新的函数或类通常会包装原始的函数或类，添加一些额外的功能，如日志记录、性能测试、权限验证等。
+
+### 语法
+
+Python 提供了一种简洁的语法来使用装饰器，通过在函数或类的定义前加上 `@` 符号，后面跟上装饰器函数的名称。例如：
+    
+    
+    def my_decorator(func):
+        def wrapper():
+            print("在函数执行之前做一些事情")
+            func()
+            print("在函数执行之后做一些事情")
+        return wrapper
+    
+    @my_decorator
+    def say_hello():
+        print("Hello!")
+    
+    say_hello()
+    
+
+在上述代码中，`my_decorator` 是一个装饰器函数，`say_hello` 函数被 `my_decorator` 装饰。当调用 `say_hello()` 时，实际上调用的是 `my_decorator` 返回的 `wrapper` 函数。
+
+### 工作原理
+
+装饰器的工作原理可以概括为以下几个步骤：
+
+  1. 定义装饰器函数，它接受一个函数作为参数。
+  2. 在装饰器函数内部定义一个新的函数（通常称为包装函数），在这个包装函数中可以添加额外的逻辑。
+  3. 包装函数调用原始函数，并返回其结果。
+  4. 装饰器函数返回包装函数。
+  5. 使用 `@` 语法将装饰器应用到目标函数上，相当于执行了 `target_function = decorator(target_function)`。
+
+
+
+### 带参数的函数装饰器
+
+如果需要装饰的函数带有参数，装饰器的包装函数也需要接受相应的参数，并将这些参数传递给原始函数。示例如下：
+    
+    
+    def my_decorator(func):
+        def wrapper(*args, **kwargs):
+            print("在函数执行之前做一些事情")
+            result = func(*args, **kwargs)
+            print("在函数执行之后做一些事情")
+            return result
+        return wrapper
+    
+    @my_decorator
+    def add(a, b):
+        return a + b
+    
+    result = add(3, 5)
+    print(result)
+    
+
+在上述代码中，`wrapper` 函数使用 `*args` 和 `**kwargs` 来接受任意数量的位置参数和关键字参数，并将它们传递给 `add` 函数。  
+在 Python 装饰器中，wrapper 这个函数名是可以修改的。wrapper 只是一个常用的约定俗成的名称，用于表示装饰器内部定义的包装函数，你可以根据自己的需求将其替换为其他合法的函数名。
+
+### 带参数的装饰器
+
+有时候，我们希望装饰器本身可以接受参数，以实现更灵活的功能。这可以通过定义一个返回装饰器的函数来实现。示例如下：
+    
+    
+    def repeat(num_times):
+        def decorator(func):
+            def wrapper(*args, **kwargs):
+                result = None
+                for _ in range(num_times):
+                    result = func(*args, **kwargs)
+                return result
+            return wrapper
+        return decorator
+    
+    @repeat(num_times=3)
+    def say_hi():
+        print("Hi!")
+    
+    say_hi()
+    
+
+在上述代码中，`repeat` 是一个接受参数的函数，它返回一个装饰器 `decorator`。`decorator` 函数再返回一个包装函数 `wrapper`，用于实现重复调用原始函数的功能。
+
+### 类装饰器
+
+除了函数装饰器，Python 还支持类装饰器。类装饰器是通过定义一个类，并实现 `__call__` 方法来实现的。示例如下：
+    
+    
+    class CountCalls:
+        def __init__(self, func):
+            self.func = func
+            self.num_calls = 0
+    
+        def __call__(self, *args, **kwargs):
+            self.num_calls += 1
+            print(f"调用 {self.func.__name__} 函数 {self.num_calls} 次")
+            return self.func(*args, **kwargs)
+    
+    @CountCalls
+    def say_hello():
+        print("Hello!")
+    
+    say_hello()
+    say_hello()
+    
+
+在上述代码中，`CountCalls` 是一个类装饰器，`__init__` 方法接受一个函数作为参数，`__call__` 方法在每次调用被装饰的函数时会被执行，用于记录函数的调用次数。
+
+### 使用场景
+
+装饰器在实际开发中有很多应用场景，常见的包括：
+
+  * **日志记录** ：记录函数的调用信息、输入参数和返回值。
+  * **性能测试** ：测量函数的执行时间。
+  * **权限验证** ：在函数执行前验证用户的权限。
+  * **缓存** ：缓存函数的计算结果，避免重复计算。
+
+
+
+总之，装饰器是 Python 中一种非常有用的特性，它可以提高代码的复用性和可维护性，让代码更加简洁和优雅。

@@ -1,0 +1,170 @@
+---
+layout: post
+title: 动态库.so如何使用
+date: 2025-01-24 16:32:00 +0800
+description: 动态库.so如何使用
+img: post-3.jpg
+tags: [cnblogs]
+author: Bai Qi
+---
+
+动态库（在 Linux 系统下通常以 `.so` 为扩展名，在 Windows 系统下以 `.dll` 为扩展名）的使用包含创建和在程序里调用这两个主要方面，以下将分别介绍在 Linux 和 Windows 系统中动态库的使用方法。
+
+### Linux 系统下动态库的使用
+
+#### 1\. 创建动态库
+
+假设有两个源文件 `add.c` 和 `subtract.c`，它们分别实现加法和减法功能。
+
+  * **`add.c`**
+
+
+    
+    
+    #include <stdio.h>
+    
+    int add(int a, int b) {
+        return a + b;
+    }
+    
+
+  * **`subtract.c`**
+
+
+    
+    
+    #include <stdio.h>
+    
+    int subtract(int a, int b) {
+        return a - b;
+    }
+    
+
+使用以下命令将这两个源文件编译成动态库 `libmath.so`：
+    
+    
+    gcc -shared -fPIC add.c subtract.c -o libmath.so
+    
+
+  * `-shared`：表示生成共享库文件。
+  * `-fPIC`：生成位置无关代码，这对于动态库是必需的。
+
+
+
+#### 2\. 编写使用动态库的程序
+
+创建一个主程序 `main.c` 来调用动态库中的函数：
+    
+    
+    #include <stdio.h>
+    
+    // 声明动态库中的函数
+    extern int add(int a, int b);
+    extern int subtract(int a, int b);
+    
+    int main() {
+        int result_add = add(5, 3);
+        int result_subtract = subtract(5, 3);
+    
+        printf("Add result: %d\n", result_add);
+        printf("Subtract result: %d\n", result_subtract);
+    
+        return 0;
+    }
+    
+
+#### 3\. 编译主程序并链接动态库
+    
+    
+    gcc main.c -L. -lmath -o main
+    
+
+  * `-L.`：指定动态库的搜索路径为当前目录。
+  * `-lmath`：指定要链接的动态库名为 `libmath.so`。
+
+
+
+#### 4\. 运行程序
+
+在运行程序之前，需要让系统知道动态库的位置。有以下几种方法：
+
+  * **临时设置环境变量** ：
+
+
+    
+    
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:.
+    ./main
+    
+
+`LD_LIBRARY_PATH` 是 Linux 系统用于指定动态库搜索路径的环境变量，上述命令将当前目录添加到该变量中。
+
+  * **永久设置环境变量** ：可以将 `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path/to/library` 添加到 `~/.bashrc` 或 `~/.bash_profile` 文件中，然后执行 `source ~/.bashrc` 使设置生效。
+  * **将动态库复制到系统默认搜索路径** ：例如 `/usr/lib` 或 `/usr/local/lib`，不过这种方法需要管理员权限。
+
+
+
+### Windows 系统下动态库的使用
+
+#### 1\. 创建动态库
+
+同样使用上述的 `add.c` 和 `subtract.c` 文件，使用 MinGW 或 Visual Studio 等工具来创建动态库。以下是使用 MinGW 的示例：
+    
+    
+    gcc -shared -o math.dll add.c subtract.c
+    
+
+#### 2\. 编写使用动态库的程序
+
+创建 `main.c` 文件：
+    
+    
+    #include <stdio.h>
+    #include <windows.h>
+    
+    // 定义函数指针类型
+    typedef int (*AddFunction)(int, int);
+    typedef int (*SubtractFunction)(int, int);
+    
+    int main() {
+        // 加载动态库
+        HINSTANCE hDLL = LoadLibrary("math.dll");
+        if (hDLL == NULL) {
+            printf("Failed to load DLL.\n");
+            return 1;
+        }
+    
+        // 获取函数地址
+        AddFunction add = (AddFunction)GetProcAddress(hDLL, "add");
+        SubtractFunction subtract = (SubtractFunction)GetProcAddress(hDLL, "subtract");
+        if (add == NULL || subtract == NULL) {
+            printf("Failed to get function address.\n");
+            FreeLibrary(hDLL);
+            return 1;
+        }
+    
+        // 调用函数
+        int result_add = add(5, 3);
+        int result_subtract = subtract(5, 3);
+    
+        printf("Add result: %d\n", result_add);
+        printf("Subtract result: %d\n", result_subtract);
+    
+        // 释放动态库
+        FreeLibrary(hDLL);
+    
+        return 0;
+    }
+    
+
+#### 3\. 编译和运行程序
+
+使用 MinGW 编译：
+    
+    
+    gcc main.c -o main
+    
+
+将 `math.dll` 和 `main.exe` 放在同一目录下，然后运行 `main.exe`。
+
+通过以上步骤，你可以在 Linux 和 Windows 系统中创建并使用动态库。

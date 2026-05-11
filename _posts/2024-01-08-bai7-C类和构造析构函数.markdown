@@ -1,0 +1,187 @@
+---
+layout: post
+title: C++类和构造/析构函数
+date: 2024-01-08 21:14:00 +0800
+description: C++类和构造/析构函数
+img: post-2.jpg
+tags: [cnblogs]
+author: Bai Qi
+---
+
+构造函数是特殊的成员函数，虽然它的名字叫构造函数，但是它的主要任务不是开空间创建对象，而是初始化对象。  
+特性：  
+1、函数名和类名相同。 如：类名Stack,那么构造函数的函数，名也为Stack  
+2、无返回值（也不需要void)。  
+3、对象实例化编译器自动调用对应的构造函数。对象在定义之后就会调用它的默认构造函数  
+4、构造函数可以重载。(构造函数虽然没有返回值，但是可以有参数)  
+5、如果类中没有显式定义构造函数，则c++编译器会自动生成一个无参的默认构造函数，一旦用户显式定义，编译器不再默认生成。
+
+# 构造函数
+    
+    
+    #include <iostream>
+    #include <cstring>
+    
+    using namespace std;
+    
+    class Student{
+        private:
+            char name[6];
+            int born;
+            bool male;
+        public:
+            // 构造函数可以重载
+            Student(){
+                name[0] = 0;
+                born = 1111;
+                male = false;
+                cout<<"constructor0: Person()"<<endl;
+            }   
+            Student(const char * initName): born(2000), male(true){
+                setName(initName);
+                cout<<"constructor1: Person(char *name), born and male init."<<endl;
+            }
+            Student(const char * initName, int initBorn, bool isMale){
+                setName(initName);
+                born = initBorn;
+                isMale = isMale;
+                cout<<"constructor2: Person()"<<endl;
+            }
+            void setName(const char *s){
+                strncpy(name, s, sizeof(name));
+            }
+            void setBorn(int b){
+                born = b;
+            }
+            void setGender(bool isMale);
+            void printInfo();
+    };
+    
+    void Student::setGender(bool isMale){
+        male = isMale;
+    }
+    
+    void Student::printInfo(){
+        cout<<"Name: "<<name<<endl;
+        cout<<"Born in: "<<born<<endl;
+        cout<<"Gender: "<<(male ? "Male": "Female")<<endl;
+    }
+    
+    int main(){
+         Student yu;
+         yu.printInfo();
+         cout<<endl;
+    
+         yu.setName("Yu");
+         yu.setBorn(20000);
+         yu.setGender(true);
+         yu.printInfo();
+         cout<<endl;
+    
+         Student li("li");
+         li.printInfo();
+         cout<<endl;
+    
+        // 类使用方法
+        //Student zhang("zhang", 33333, false);
+        Student zhang = Student("zhang", 2001, false);
+        zhang.printInfo();
+        cout<<endl;
+    
+        Student *zhou = new Student("zhou", 2002, true);
+        //或者在堆上申请，前面都是栈上
+        zhou->printInfo();
+        delete zhou;
+        cout<<endl;
+    }
+    
+
+# 析构函数
+    
+    
+    #include <iostream>
+    #include <string.h>
+    using namespace std;
+    class Student{
+        private:
+            char *name;
+            int born;
+            bool male;
+        public:
+            Student(){
+                // 初始化标准：--std==c++11
+                name = new char[1024] {0};
+                born = 0;
+                male = false;
+                cout<<"constructor0"<<endl;
+            }
+            Student(const char *initName, int initBorn, bool isMale){
+                name = new char[1024];
+                setName(initName);
+                born = initBorn;
+                male = isMale;
+                cout<<"constructor1"<<endl;
+            }
+            ~Student(){
+                cout << "destroy name[] "<<name<<endl;
+                delete [] name;
+            }
+            void setName(const char *s){
+                strncpy(name, s, 1024);
+            }
+            void setGender(bool isMale);
+            void setBorn(int initBorn);
+            void printInfo();
+    };
+    
+    void Student::setGender(bool isMale){
+        male  = isMale;
+    };
+    
+    void Student::setBorn(int initBorn){
+        born = initBorn;
+    }
+    void Student::printInfo(){
+        cout<<"Name "<<name<<endl;
+        cout<<"Born in "<<born<<endl;
+        cout<<"Gender is "<<(male?"Male":"Female")<<endl;
+    };
+    
+    int main(){
+        {
+          // 增加花括号，改变作用域，改变析构函数的调用顺序
+          Student yu;
+          yu.printInfo();
+          cout<<"-------------"<<endl;
+        
+          yu.setName("yu");
+          yu.setBorn(2000);
+          yu.setGender(true);
+          yu.printInfo();
+          cout<<"-----yu--------"<<endl;
+          // yu 在这里被销毁
+        }
+        Student xue = Student("XueQikun", 1999, true);
+        xue.printInfo();
+        cout<<"-----xue--------"<<endl;
+    
+        Student * zhou = new Student("Zhou", 2020, false);
+        zhou->printInfo();
+        delete zhou;
+        cout<<"-----zhou--------"<<endl;
+    
+        // 注意：析构函数调用的顺序：Zhou -> Xue -> yu（不加花括号时）
+    
+        // 注意：使用delete的区别
+        Student * class1 = new Student[3]{
+            {"Tom", 2000, true},
+            {"Bob", 2001, false},
+            {"Amy", 2002, true}
+        };
+        // 方式1.只会调用第一个对象的析构函数，第二第三个对象不会被调用！
+        // delete class1;
+        // 方式2.三个元素的析构函数都会被调用！
+        delete [] class1;
+        return 0;
+    }
+    

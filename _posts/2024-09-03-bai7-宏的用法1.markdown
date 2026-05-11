@@ -1,0 +1,79 @@
+---
+layout: post
+title: 宏的用法1
+date: 2024-09-03 14:35:00 +0800
+description: 宏的用法1
+img: post-1.jpg
+tags: [cnblogs]
+author: Bai Qi
+---
+
+
+    #include <stdio.h>
+    #include <math.h>
+    /*
+    *从技术角度讲，可以把宏的替换体看做是记号（token）型字符串，而不是字符型字符串。
+    *C预处理器记号是宏定义的替换体中单独的“词”。用空白把这些词分开
+    *如：
+    *define FOUR 2*2
+    *该宏定义有一个记号：2*2序列
+    *但是下面的宏定义：
+    *define SIX 2 * 3
+    *有3个记号：2、*、3
+    *在实际应用中一些C编译器把宏替换体视作字符串而不是记号
+    */
+    
+    // #define PSQR(X) printf("The square of #X is %d.\n", ((X) * (X))); 错误的方式
+    // 1. #作为一个预处理运算法。如果x是一个宏形参，#x就是转换为字符串"x"的形参名
+    #define PSQR(X) printf("The square of " #X " is %d.\n", ((X) * (X)));
+    
+    // 2. ##运算符用于类宏函数宏的替换部分。##运算符把两个记号组合成一个记号
+    // XNMAE(3)将展开为x4
+    #define XNAME(n) x##n
+    #define PRINT_XN(n) printf("x" #n " = %d\n", x ## n);
+    
+    // 3. 变参宏：...和__VA_ARGS__
+    // 通过把宏参数列表最后的参数写成省略号来实现
+    // __VA_ARGS__可用在替换部分中，代表省略号代表什么，例如
+    #define PR(...) printf(__VA_ARGS__)
+    #define PR2(X, ...) printf("Message " #X ":"  __VA_ARGS__)
+    
+    int main(){
+    	printf("1. #\n");
+    	PSQR(8);
+    	PSQR(2+4);
+    	printf("2. ##\n");
+    	int XNAME(1) = 14;/*等价于int x1 = 14*/
+    	int XNAME(2) = 20;/*等价于int x2 = 20*/
+    	int x3 = 30;
+    	PRINT_XN(1);
+    	PRINT_XN(2);
+    	PRINT_XN(3);
+    	printf("3. __VA_ARGS\n");
+    	//__VA_ARGS__展开为1个参数：HowDy“”
+    	PR("HowDy");
+    	// __VA_ARGS__展开为3个参数："weight = %d, shipping = $%.2f\n"、wt、sp
+    
+    	int wt =100;
+    	float sp = 1.3f;
+    	PR(", weight = %d, shipping = $%.2f\n", wt, sp);
+    	double x = 48;
+    	double y;
+    	y = sqrt(x);
+    	PR2(1, "x=%g\n", x);
+    	PR2(2, "x=%.2f, y=%.4f\n", x, y);
+    	return 0;
+    }
+    // 1. #
+    // The square of 8 is 64.
+    // The square of 2+4 is 36.
+    // 2. ##
+    // x1 = 14
+    // x2 = 20
+    // x3 = 30
+    // 3. __VA_ARGS
+    // HowDy, weight = 100, shipping = $1.30
+    // Message 1:x=48
+    // Message 2:x=48.00, y=6.9282
+    
+    

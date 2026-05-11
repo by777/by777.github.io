@@ -1,0 +1,236 @@
+---
+layout: post
+title: C++类型转换
+date: 2024-01-11 22:33:00 +0800
+description: C++类型转换
+img: post-3.jpg
+tags: [cnblogs]
+author: Bai Qi
+---
+
+类型转换可以分为两种情况：隐式类型转化；显示类型转化。  
+在C语言中，如果赋值运算符左右两侧类型不同，或者形参与实参类型不匹配，或者返回值类型与  
+接收返回值类型不一致时，就需要发生类型转化，C语言中总共有两种形式的类型转换：隐式类型  
+转换和显式类型转换。
+
+  1. 隐式类型转化：编译器在编译阶段自动进行，能转就转，不能转就编译失败
+  2. 显式类型转化：需要用户自己处理
+
+
+
+隐式类型转化有些情况下可能会出问题：比如数据精度丢失  
+显式类型转换将所有情况混合在一起，代码不够清晰  
+因此C++提出了自己的类型转化风格，注意因为C++要兼容C语言，所以C++中还可以使用C语言的  
+转化风格。
+
+# C++强制类型转换
+
+static_cast，reinterpret_cast，const_cast，dynamic_cast，这是c++规范的四种类型转化。下面是代码实例。
+    
+    
+    #include <iostream>
+    using namespace std;
+    
+    class Person{
+        protected:
+            string name;
+        public:
+            Person(string name=""): name(name){}
+            // 使用dynamic_cast要求必须是多态类型，如果去掉所有的virtual会报错
+            virtual ~Person(){}
+            // string getInfo(){return name;}
+            virtual string getInfo(){return name;}
+    };
+    
+    class Student: public Person{
+        string studentid;
+        public:
+            Student(string name="", string sid=""): Person(name), studentid(sid){}
+            string getInfo(){return name+":"+studentid;}
+    };
+    // runtime type identification(RTTI)
+    // 运行时类型鉴别
+    int main(int argc, const char** argv) {
+        // 父类
+        Person person("YU");
+        // 子类
+        Student student("Sam", "2020202020");
+    
+        // 1.把子类指针转给父类
+        Person *pp = &student;
+        Person& rp = student;
+        Student *ps = (Student *)&person;
+        cout<<pp->getInfo()<<endl; // Sam
+        cout<<rp.getInfo()<<endl;  // Sam
+        cout<<ps->getInfo()<<endl;  // danger if getInfo is not virtual
+        // 这一行会调用子类student的getInfo，但是
+        //  what():  std::bad_alloc
+    
+        // 1.dynaminc_cast操作符: 动态类型转换：可以把多态的类型转换
+        // typeid操作符: 对象的类型id，运行的时候把类型id返回来，返回来一个type_info class
+        // type_info: class
+        cout<<person.getInfo()<<endl;
+        cout<<"--------------------"<<endl;
+        string s("hello");
+        cout<<"typeid.name of s is"<<typeid(s).name()<<endl;
+        cout<<"typeid.name of std::string is"<<typeid(std::string).name()<<endl;
+        cout<<"typeid.name of Student is"<<typeid(Student).name()<<endl;
+    
+        if(typeid(std::string) == typeid(s)){
+            cout<<"s is a std::string object"<<endl;
+        }
+    
+        cout<<"-----dynamic_cast-------"<<endl;
+        // 1.dynamic_cast 
+        ps = dynamic_cast<Student *>(&person);
+        printf("address = %p\n", ps); // nil
+    
+        pp = dynamic_cast<Person *>(&student);
+        printf("address = %p\n", pp);
+    
+        cout<<"----const_cast-------"<<endl;
+        // 2.const_cast是把const修饰符去掉
+        int value1 = 100;
+        const int value2 = 200;
+        // const修饰的变量取地址编译会报错
+        // int *pv_err = &value2;
+        // 这样虽然能const int *pv = &value2;
+        // 但是也失去了通过这个指针修改值的能力了
+        int *pv1 = const_cast<int *>(&value1);
+        int *pv2 = const_cast<int *>(&value2);
+        (*pv1)++;
+        (*pv2)++;
+        // 编译通过，但是value2并没有被修改！
+        cout<<"v1-> "<<value1<<" v2->"<<value2<<endl;// 101 200
+    
+        // 不论是通过指针，还是引用，value2的值都不会被修改！
+        int& v2 = const_cast<int &> (value2);// 200
+        v2 ++;
+        cout<<"v2 ->"<<value2<<endl;
+    
+        cout<<"*pv2指针"<<*pv2<<endl;
+        cout<<"v2引用"<<v2<<endl;
+        // 解释：int *pv2 = const_cast<int *>(&value2);
+        // 应该是等同int c = 200; int *pv2 = &c;
+    
+        cout<<"-------static_cast------"<<endl;
+        // 3.static_cast可以隐式的转就可以（如子类父类），不相关的类就不可以
+    
+        cout<<"----reinterpret_cast------"<<endl;
+        // 4.最强大转reinterpret_cast
+        int i = 0x100;
+        float *p1 = reinterpret_cast<float *>(i);// static_cast会失败
+        int *p2 = reinterpret_cast<int *>(p1);
+        printf("p1: %p\n", p1);
+        printf("p2: %p\n", p2);
+        return 0;
+    }
+    
+
+> 部分内容在https://blog.csdn.net/ChaoFreeandeasy_/article/details/130342414
+    
+    
+    #include <iostream>
+    using namespace std;
+    class MyTime{
+        private:
+            int hours;
+            int minutes;
+        public:
+            MyTime(): hours(0), minutes(0){}
+            MyTime(int h, int m): hours(h), minutes(m){}
+            MyTime(int m): hours(0), minutes(m){
+                this->hours += this->minutes / 60;
+                this->minutes %=60;
+                cout<<"called constructor"<<endl;
+            }
+            MyTime operator+(const MyTime & t) const{
+                MyTime sum;
+                sum.minutes = this->minutes + t.minutes;
+                sum.hours = this->hours + t.hours;
+                sum.hours += sum.hours / 60;
+                sum.minutes %= 60;
+                return sum;
+            }
+            MyTime & operator+=(const MyTime & t){
+                this->minutes += t.minutes;
+                this->hours += t.hours;
+                this->minutes %= 60;
+                this->hours = this-> hours /60;
+                return *this;
+            }
+            MyTime operator+(int m) const{
+                MyTime sum;
+                sum.minutes = this->minutes + m;
+                sum.hours = this->hours;
+                sum.hours += sum.minutes / 60;
+                sum.minutes %= 60;
+                return sum;
+            }
+            MyTime & operator=(int m) {
+                MyTime sum;
+                this->minutes = m;
+                this->hours = 0;
+                this->hours += this->minutes / 60;
+                this->minutes %= 60;
+                cout<<"called operator="<<endl;
+                return *this;
+            }
+            friend MyTime operator+(int m, MyTime t){
+                return t + m;
+            }
+    
+            string getTime() const {
+                return std::to_string(this->hours) + " hours and " 
+                    + std::to_string(this->minutes) + " minutes.";
+            }
+            // 利用友元函数重载<<输出流，
+            // 此处注意返回值类型ostream为了return_value（cout） << endl;
+            // 输出符能继续连起来（否则可能变成0<<endl;）
+            friend ostream & operator<<(ostream & os, const MyTime & t){
+                string str = to_string(t.hours) + " h " + to_string(t.minutes) + "m.";
+                os<<str;
+                return os;
+            }
+            // 重载输入流
+            friend istream & operator>>(istream & is, MyTime & t){
+                is >> t.hours >> t.minutes;
+                t.hours += t.minutes / 60;
+                t.minutes %= 60;
+                return is;
+            }
+    
+            // implicit conversion 隐式类型转换
+            operator int() const{
+                cout<<"called implicit conversion"<<endl;
+                return this->hours * 60 + this->minutes;
+            }
+            // explicit conversion 显式类型转换
+            explicit operator float() const{
+                return float(this->hours * 60 + this->minutes);
+            }
+    };
+    
+    
+    
+    int main(int argc, const char** argv) {
+        MyTime t1 = MyTime(1, 40);
+        int minutes= t1;// 隐式类型转换
+        float f = float(t1); // 显示类型转换
+        cout<<f<<endl;
+        float f1 = t1;// 0.注意：这样不会编译报错，但是会先调用int类型转换，再从int转float
+        cout<<f1<<endl;
+    
+        cout<<"-----------------"<<endl;
+        // 1.注意：这种初始化会只会执行MyTime(int m)构造函数
+        MyTime t2 = 100;
+        cout<<t2<<endl;
+    
+        // 2.注意：这种方式会有限执行运算符=重载，若没有定义则调用构造函数
+        MyTime t3;
+        t3 = 80;
+        cout<<t3<<endl;
+    
+        return 0;
+    }
+    

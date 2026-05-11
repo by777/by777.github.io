@@ -1,0 +1,24 @@
+---
+layout: post
+title: assert用法
+date: 2024-01-24 21:52:00 +0800
+description: assert用法
+img: post-1.jpg
+tags: [cnblogs]
+author: Bai Qi
+---
+
+
+    #include <iostream>
+    // 注意：如果想取消使用assert，NDEBUG必须在include <cassert>前
+    // 或者在编译时候加，g++ assert用法.cc -DNDEBUG
+    // #define NDEBUG
+    #include <cassert>
+    using namespace std;
+    
+    int main(int argc, const char** argv) {
+        assert(argc == 2);
+        cout<<"---------------"<<endl;
+        return 0;
+    }
+    

@@ -1,0 +1,76 @@
+---
+layout: post
+title: extern关键字
+date: 2024-11-20 17:09:00 +0800
+description: extern关键字
+img: post-2.jpg
+tags: [cnblogs]
+author: Bai Qi
+---
+
+当然，这里有一个使用 `extern` 关键字的简单例子，它涉及一个全局变量和函数。
+
+假设我们有两个源文件：`main.c` 和 `math_functions.c`，以及一个头文件 `math_functions.h`。
+
+**math_functions.h** （头文件）:
+    
+    
+    #ifndef MATH_FUNCTIONS_H
+    #define MATH_FUNCTIONS_H
+    
+    // 声明一个全局变量，使用extern关键字
+    extern int globalCounter;
+    
+    // 声明一个函数，使用extern关键字
+    extern void incrementCounter(void);
+    
+    #endif // MATH_FUNCTIONS_H
+    
+
+**math_functions.c** （源文件）:
+    
+    
+    #include "math_functions.h"
+    
+    // 定义全局变量，这里分配存储空间
+    int globalCounter = 0;
+    
+    // 定义函数，这里提供函数体
+    void incrementCounter(void) {
+        globalCounter++;
+    }
+    
+
+**main.c** （主程序源文件）:
+    
+    
+    #include <stdio.h>
+    #include "math_functions.h"
+    
+    int main() {
+        // 可以直接使用全局变量和函数，因为它们在头文件中被声明
+        printf("Initial counter: %d\n", globalCounter);
+        incrementCounter();
+        printf("Counter after increment: %d\n", globalCounter);
+        return 0;
+    }
+    
+
+在这个例子中：
+
+  1. `math_functions.h` 头文件中使用 `extern` 关键字声明了一个全局变量 `globalCounter` 和一个函数 `incrementCounter`。这告诉编译器这些实体将在其他地方定义。
+
+  2. `math_functions.c` 源文件中定义了这些全局变量和函数。`globalCounter` 变量在这里被初始化，而 `incrementCounter` 函数在这里被实现。
+
+  3. `main.c` 包含了 `math_functions.h` 头文件，因此它能够访问 `globalCounter` 和 `incrementCounter`。尽管这些实体是在其他文件中定义的，但由于在头文件中声明了它们，`main.c` 可以像它们在同一个文件中一样使用这些变量和函数。
+
+
+
+
+编译时，你需要确保编译器能够找到所有的源文件和头文件。例如，如果你使用 gcc 编译器，你可以这样编译：
+    
+    
+    gcc -o program main.c math_functions.c
+    
+
+这将生成一个可执行文件 `program`，你可以运行它来看到结果。

@@ -1,0 +1,66 @@
+---
+layout: post
+title: inline函数与宏函数
+date: 2024-01-02 20:49:00 +0800
+description: inline函数与宏函数
+img: post-5.jpg
+tags: [cnblogs]
+author: Bai Qi
+---
+
+在 c/c++ 中，为了解决一些频繁调用的小函数大量消耗栈空间（栈内存）的问题，特别的引入了 inline 修饰符，表示为内联函数。  
+inline不是强制的，编译器可以对它置之不理。例如，递归函数通常不会被编译为inline函数，编译器有权决定是否将声明为inline的函数编译为inlin
+
+> 栈空间就是指放置程序的局部数据（也就是函数内数据）的内存空间。
+    
+    
+    #include <iostream>
+    using namespace std;
+    #define MAX_MACRO(a, b) (a) > (b) ? (a) : (b)
+    #define MAX_MACRO2(a, b) a > b ? a : b
+    inline int max_function(int a, int b){
+        return a>b ? a: b;
+    }
+    int main(){
+        int num1 = 20;
+        int num2 = 30;
+    
+        int maxv = max_function(num1, num2);
+        cout << maxv<< endl;
+    
+        // 1.用宏定义没有函数调用的代价
+        maxv = MAX_MACRO(num1, num2);
+        cout << maxv<<endl;
+    
+        // 2.但是宏函数有其他的坑，比如重复计算的问题
+        // 注意：这里预期返回max(20, 30) = 30
+        maxv = MAX_MACRO(num1++, num2++);
+        cout << maxv<<endl;
+        cout << num1<<endl;
+        cout << num2<<endl;
+        // 解释：这是因为宏替换的时候实际是：
+        // (a) > (b) ? (a) : (b)
+        // (num1++) > (num2++) ? (num1++) : (num2++)
+        // (20++) > (30++) ? (21++) : (31++)
+        // return 31, num1 = 21(没执行), num2 = 32
+        cout << "----------------------"<<endl;
+        
+        // 这一预期返回max(20, 30) = 30
+        num1 = 20, num2 = 30;
+        maxv = max_function(num1++, num2++);
+        cout << maxv<<endl;
+        cout << "----------------------"<<endl;
+    
+        // 3.又比如如果对宏参数不加括号,会受到优先级顺序的影响
+        num1 = 0xAB09;
+        num2 = 0xEF08;
+        maxv = MAX_MACRO2(num1&0xFF, num2&0xFF);
+        // cout<<hex;
+        cout<<"eg3"<<endl;
+        cout<<maxv<<endl;
+        cout<<num1<<endl;
+        cout<<num2<<endl;
+        cout << "----------------------"<<endl;
+        return 0;
+    }
+    

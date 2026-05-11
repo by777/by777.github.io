@@ -1,0 +1,38 @@
+---
+layout: post
+title: const指针
+date: 2023-12-29 22:05:00 +0800
+description: const指针
+img: post-3.jpg
+tags: [cnblogs]
+author: Bai Qi
+---
+
+
+    #include <iostream>
+    using namespace std;
+    int main(){
+    
+    
+        // const 指针
+        int num = 1;
+        int another = 2;
+    
+        // 这个指针指向的内容，不能透过这个指针来修改
+        // 可以理解为const int*, const int 的指针 ==> 常量指针
+        const int * p1 = &num;
+        *p1 = 3; // error
+        num = 3; // okay
+        cout<<"num: "<<num<<endl;
+    
+        // 可以通过p2修改该指针指向的内容
+        int * const p2 = &num;
+        *p2 = 3; // okay
+        p2 = &another; // error
+    
+        // 都不可以修改
+        const int * const p3 = &num;
+        // Summary: 这里能通过就近原则，靠近指针const，则不能修改指针，靠近目标变量，则不能修改目标变量
+        return 0;
+    }
+    

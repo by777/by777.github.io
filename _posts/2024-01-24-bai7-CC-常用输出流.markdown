@@ -1,0 +1,66 @@
+---
+layout: post
+title: C/C++ 常用输出流
+date: 2024-01-24 21:50:00 +0800
+description: C/C++ 常用输出流
+img: post-1.jpg
+tags: [cnblogs]
+author: Bai Qi
+---
+
+在程序设计中，数据输入/输出（I/O）操作是必不可少的，C++语言的数据输入/输出操作是通过I/O流库来实现的。C++中把数据之间的传输操作称为流，流既可以表示数据从内存传送到某个载体或设备中，即输出流，也可以表示数据从某个载体或设备传送到内存缓冲区变量中，即输入流。
+
+C++流涉及以下概念：
+
+标准I/O流：内存与标准输入输出设备之间信息的传递；  
+文件I/O流：内存与外部文件之间信息的传递；  
+字符串I/O流：内存变量与表示字符串流的字符数组之间信息的传递。
+
+> 更多信息在https://blog.csdn.net/tangzhen8839/article/details/43152091
+    
+    
+    #include <iostream>
+    using namespace std;
+    /**
+        在C中有三个预定义的流，他们的数据类型都是FILE *
+        1. stdin
+        2. stdout
+        3. stderr
+        fprintf(stdout, "INFO: xxxx\n");
+            = printf("INFO: xxxx\n");
+        fprintf(stderr, "ERROR: xxxx\n");
+        （第一个参数stderr是一个全局变量，可以换成一个文件指针）
+    
+        C++中：
+        cout<<"INFO"<<endl;
+        cerr<<"ERROR"<<endl;
+    
+    */
+    void div(int n){
+        if(n % 2!= 0){
+            cerr<<"ERROR: input"<<n<<endl;
+        }else{
+            int result = n / 2;
+            cout<<"INFO: result"<<result<<endl;
+        }
+    }
+    void div2(int n){
+        if(n % 2!= 0){
+            fprintf(stderr, "ERROR: input:%d\n", n);
+        }else{
+            int result = n / 2;
+            fprintf(stdout, "INFO：result: %d\n", result);
+        }
+    }
+    int main(int argc, const char** argv) {
+        for(int n=-5; n<=5; n++){ 
+            div2(n);
+        }
+        // 标准输入：0 标准输出：1 标准错误：2
+        // 标准输出重定向  ./a.out > out
+        // 标准错误重定向  ./a.out 2> err
+        // 标准输出和错误  ./a.out > all 2>&1
+        // = ./a.out &> all
+        return 0;
+    }
+    

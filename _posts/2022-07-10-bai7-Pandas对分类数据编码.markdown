@@ -1,0 +1,200 @@
+---
+layout: post
+title: Pandas对分类数据编码
+date: 2022-07-10 10:42:00 +0800
+description: Pandas对分类数据编码
+img: post-2.jpg
+tags: [cnblogs]
+author: Bai Qi
+---
+
+> 原文地址：<https://mp.weixin.qq.com/s/8BFdFvTyP5NkJ1YZp52vEg>
+
+# Pandas对分类数据编码
+    
+    
+    import pandas as pd
+    from sklearn.preprocessing import Binarizer, LabelEncoder, OrdinalEncoder
+    
+    df = pd.DataFrame(
+        {'Sex': ['Male', 'Female', 'Male', 'Male', 'Male',
+                 'Female', 'Male', 'Male', 'Female', 'Female'],
+         'Course Name': ['Python', 'Java', 'C', 'Sql', 'Linux', 'Python', 'Python', 'Java', 'C', 'Php'],
+         'Score': [95, 85, 75, 65, 55, 95, 75, 65, 55, 85]
+         }
+    )
+    
+
+## 数值型数据【Score列打标签】
+
+让我们先来讨论连续型数据的转换，  
+也就是根据Score列的值，  
+来新增一列标签，即如果分数大于90，则标记为A，分数在80-90标记为B，以此类推。
+
+### 1\. 自定义函数 + for
+    
+    
+    df1 = df.copy()
+    
+    
+    def myfun(x):
+        if x > 90:
+            return 'A'
+        elif 80 <= x < 90:
+            return 'B'
+        elif 70 <= x < 80:
+            return 'C'
+        elif 60 <= x < 70:
+            return 'D'
+        else:
+            return 'E'
+    
+    
+    df1['Score_Label'] = None
+    for i in range(len(df1)):
+        df1.iloc[i, 3] = myfun(df1.iloc[i, 2])
+    print(df1)
+    
+
+### 2\. 自定义函数 + map
+    
+    
+    def map_fun(x):
+        if x > 90:
+            return 'A'
+        elif 80 <= x < 90:
+            return 'B'
+        elif 70 <= x < 80:
+            return 'C'
+        elif 60 <= x < 70:
+            return 'D'
+        else:
+            return 'E'
+    
+    df2 = df.copy()
+    df2['Score_Label'] = df2['Score'].map(map_fun)
+    print(df2)
+    
+
+### 3\. 自定义函数+apply
+
+  1. map、apply在用于Series时，对每一个值进行处理，两者并没有什么区别。（是否受数据量影响可以自行验证）
+  2. apply不仅可以用于Series，还可以用于DataFrame；而map只能用于Series。
+  3. 一般情况下，apply应用更广泛，尤其是自定义函数带多个参数时，建议使用apply。
+
+
+    
+    
+    df3 = df.copy()
+    df3['Score_Label'] = df3['Score'].apply(map_fun)
+    print(df3)
+    
+
+### 4\. 使用pd.cut切分数据
+    
+    
+    df4 = df.copy()
+    bins = [0, 60, 70, 80, 90, 100]
+    # bins把数据域切分成0~60，。。。，90~1005个区间
+    df4['Score_Label'] = pd.cut(df4['Score'], bins=bins, labels=['E', 'D', 'C', 'B', 'A'])
+    print(df4)
+    
+
+### 5\. 使用 sklearn的二值化
+
+如果需要新增一列并判定成绩是否及格，就可以使用Binarizer函数
+    
+    
+    df5 = df.copy()
+    binarizer = Binarizer(threshold=60)
+    trans = binarizer.fit_transform(df5['Score'].to_numpy().reshape(-1, 1))
+    df5['是否及格'] = trans
+    print(df5)
+    
+
+## 文本型数据打标签
+
+### 对文本数据进行转换打标签。例如将性别男、女分别标记为0、1
+    
+    
+    print('1. 使用replace，但要注意的是，上面说过的自定义函数相关方法依旧是可行的')
+    df6 = df.copy()
+    df6['Sex_Label'] = df6['Sex'].replace(['Male', 'Female'], [0, 1])
+    print(df6)
+    
+
+### 使用value_counts来自动指定标签【Course Name多类别】
+    
+    
+    df6 = df.copy()
+    value = df6['Course Name'].value_counts()
+    print(type(value))
+    value_map = dict(
+        (v, i) for i, v in enumerate(value.index)
+    )
+    print(value, value_map)
+    df6['Course Name Label'] = df6.replace(
+      {'Course Name': value_map}
+    )['Course Name']
+    print(df6)
+    
+
+### 使用map：新增一列，一定要能够想到map
+    
+    
+    df7 = df.copy()
+    Map = {elem: index for index, elem in enumerate(set(df["Course Name"]))}
+    df7['Course Name_Label'] = df7['Course Name'].map(Map)
+    print(df7)
+    
+
+### 使用使用astype
+    
+    
+    df8 = df.copy()
+    value = df8['Course Name'].astype('category')
+    df8['Course Name_Label'] = value.cat.codes
+    print(df8)
+    
+
+### 5\. 使用sklearn LabelEncoder
+    
+    
+    df9 = df.copy()
+    le = LabelEncoder()
+    le.fit(df['Sex'])
+    df9['Sex_Label'] = le.transform(df9['Sex'])
+    le.fit(df9['Course Name'])
+    df9['Course Name Label'] = le.transform(df9['Course Name'])
+    print(df9)
+    
+
+### 6\. 一次性转换两列也是可以的
+    
+    
+    df9 = df.copy()
+    oe = OrdinalEncoder()
+    oe.fit(df9[['Sex', 'Course Name']])
+    df9[['Sex_Label', 'Course Name Label']] = oe.transform(
+      df9[['Sex', 'Course Name']]
+    )
+    print(df9)
+    
+
+### 7\. 我们希望 Python 对应 0，Java对应1，使用factorize，它会根据出现顺序进行编码
+    
+    
+    df10 = df.copy()
+    df10['Course Name_Label'] = pd.factorize(df10['Course Name'])[0]
+    print(df10)
+    
+
+### 结合匿名函数，我们可以做到对多列进行有序编码转换
+    
+    
+    df11 = df.copy()
+    cat_columns = df10.select_dtypes(['object']).columns
+    
+    df11[['Sex_Label', 'Course Name_Label']] = df10[cat_columns].apply(
+        lambda x: pd.factorize(x)[0])
+    
