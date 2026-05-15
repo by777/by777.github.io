@@ -11,7 +11,7 @@ url: "https://by777.github.io" # the base hostname & protocol for your site
 # Author settings
 author: Bai Qi # add your name
 author-pic: avatar.svg
-about-author: /dev/brain — stdout: C++ | Python | DSP | 图像处理 | 造轮子爱好者
+about-author: "/dev/brain -- stdout: C++, Python, DSP, 图像处理, 造轮子爱好者"
 
 # Contact links
 email: 1373953675@qq.com
