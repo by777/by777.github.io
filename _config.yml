@@ -10,8 +10,8 @@ url: "https://by777.github.io" # the base hostname & protocol for your site
 
 # Author settings
 author: Bai Qi # add your name
-author-pic: adam-face.jpg
-about-author: My name is BaiQi. I’m a full-time adventure travel blogger and photographer who’s been exploring the world for over 2 years.
+author-pic: avatar.svg
+about-author: /dev/brain — stdout: C++ | Python | DSP | 图像处理 | 造轮子爱好者
 
 # Contact links
 email: 1373953675@qq.com
