@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_33_numbers
+permalink: /runoob/runoob_33_numbers/
 date: 2017-02-02 11:03:00 +0800
 description: runoob_33_numbers
 img: post-5.jpg

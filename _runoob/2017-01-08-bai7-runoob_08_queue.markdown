@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_08_queue
+permalink: /runoob/runoob_08_queue/
 date: 2017-01-08 10:41:00 +0800
 description: runoob_08_queue
 img: post-5.jpg

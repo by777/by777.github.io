@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_21_type_traits
+permalink: /runoob/runoob_21_type_traits/
 date: 2017-01-21 10:52:00 +0800
 description: runoob_21_type_traits
 img: post-2.jpg

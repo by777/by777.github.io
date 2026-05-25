@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_25_memory
+permalink: /runoob/runoob_25_memory/
 date: 2017-01-25 10:54:00 +0800
 description: runoob_25_memory
 img: post-3.jpg

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_23_stdexcept
+permalink: /runoob/runoob_23_stdexcept/
 date: 2017-01-23 10:53:00 +0800
 description: runoob_23_stdexcept
 img: post-4.jpg

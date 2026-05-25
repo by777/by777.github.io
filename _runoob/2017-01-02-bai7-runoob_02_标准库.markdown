@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_02_标准库
+permalink: /runoob/runoob_02_标准库/
 date: 2017-01-02 10:34:00 +0800
 description: runoob_02_标准库
 img: post-5.jpg

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_11_iterator
+permalink: /runoob/runoob_11_iterator/
 date: 2017-01-11 10:43:00 +0800
 description: runoob_11_iterator
 img: post-6.jpg

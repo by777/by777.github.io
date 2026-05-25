@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_29_codecvt
+permalink: /runoob/runoob_29_codecvt/
 date: 2017-01-29 10:56:00 +0800
 description: runoob_29_codecvt
 img: post-2.jpg

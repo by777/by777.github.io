@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_15_chrono
+permalink: /runoob/runoob_15_chrono/
 date: 2017-01-15 10:47:00 +0800
 description: runoob_15_chrono
 img: post-4.jpg

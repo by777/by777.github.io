@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_24_cstdio
+permalink: /runoob/runoob_24_cstdio/
 date: 2017-01-24 10:53:00 +0800
 description: runoob_24_cstdio
 img: post-3.jpg

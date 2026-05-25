@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_05_sstream
+permalink: /runoob/runoob_05_sstream/
 date: 2017-01-05 10:38:00 +0800
 description: runoob_05_sstream
 img: post-6.jpg

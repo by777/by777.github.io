@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_18_condition_variable
+permalink: /runoob/runoob_18_condition_variable/
 date: 2017-01-18 10:50:00 +0800
 description: runoob_18_condition_variable
 img: post-4.jpg

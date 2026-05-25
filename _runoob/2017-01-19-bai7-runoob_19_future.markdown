@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_19_future
+permalink: /runoob/runoob_19_future/
 date: 2017-01-19 10:51:00 +0800
 description: runoob_19_future
 img: post-1.jpg

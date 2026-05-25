@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_30_cassert
+permalink: /runoob/runoob_30_cassert/
 date: 2017-01-30 10:57:00 +0800
 description: runoob_30_cassert
 img: post-6.jpg

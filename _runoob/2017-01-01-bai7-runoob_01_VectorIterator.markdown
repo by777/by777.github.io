@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_01_Vector&Iterator
+permalink: /runoob/runoob_01_Vector&Iterator/
 date: 2017-01-01 10:24:00 +0800
 description: runoob_01_Vector&Iterator
 img: post-2.jpg

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_22_typeinfo
+permalink: /runoob/runoob_22_typeinfo/
 date: 2017-01-22 10:52:00 +0800
 description: runoob_22_typeinfo
 img: post-4.jpg

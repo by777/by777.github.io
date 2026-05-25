@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_06_array
+permalink: /runoob/runoob_06_array/
 date: 2017-01-06 10:39:00 +0800
 description: runoob_06_array
 img: post-6.jpg

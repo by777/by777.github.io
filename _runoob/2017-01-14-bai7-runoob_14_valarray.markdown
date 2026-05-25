@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_14_valarray
+permalink: /runoob/runoob_14_valarray/
 date: 2017-01-14 10:46:00 +0800
 description: runoob_14_valarray
 img: post-1.jpg

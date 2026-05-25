@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_26_utility
+permalink: /runoob/runoob_26_utility/
 date: 2017-01-26 10:54:00 +0800
 description: runoob_26_utility
 img: post-1.jpg

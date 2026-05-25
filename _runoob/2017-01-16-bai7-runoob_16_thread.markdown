@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_16_thread
+permalink: /runoob/runoob_16_thread/
 date: 2017-01-16 10:48:00 +0800
 description: runoob_16_thread
 img: post-5.jpg

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_12_functional
+permalink: /runoob/runoob_12_functional/
 date: 2017-01-12 10:43:00 +0800
 description: runoob_12_functional
 img: post-6.jpg

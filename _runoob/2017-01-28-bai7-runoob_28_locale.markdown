@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_28_locale
+permalink: /runoob/runoob_28_locale/
 date: 2017-01-28 10:56:00 +0800
 description: runoob_28_locale
 img: post-6.jpg

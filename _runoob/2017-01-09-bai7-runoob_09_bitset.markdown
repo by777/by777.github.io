@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_09_bitset
+permalink: /runoob/runoob_09_bitset/
 date: 2017-01-09 10:41:00 +0800
 description: runoob_09_bitset
 img: post-1.jpg

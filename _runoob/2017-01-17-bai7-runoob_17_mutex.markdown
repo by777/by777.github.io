@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_17_mutex
+permalink: /runoob/runoob_17_mutex/
 date: 2017-01-17 10:49:00 +0800
 description: runoob_17_mutex
 img: post-3.jpg

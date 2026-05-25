@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_34_opencv
+permalink: /runoob/runoob_34_opencv/
 date: 2017-02-03 11:04:00 +0800
 description: runoob_34_opencv
 img: post-6.jpg

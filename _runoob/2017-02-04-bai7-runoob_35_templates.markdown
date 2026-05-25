@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_35_templates
+permalink: /runoob/runoob_35_templates/
 date: 2017-02-04 11:05:00 +0800
 description: runoob_35_templates
 img: post-6.jpg

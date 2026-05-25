@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_20_atomic
+permalink: /runoob/runoob_20_atomic/
 date: 2017-01-20 10:51:00 +0800
 description: runoob_20_atomic
 img: post-1.jpg

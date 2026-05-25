@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_27_random
+permalink: /runoob/runoob_27_random/
 date: 2017-01-27 10:55:00 +0800
 description: runoob_27_random
 img: post-4.jpg

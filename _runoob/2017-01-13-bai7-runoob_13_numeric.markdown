@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_13_numeric
+permalink: /runoob/runoob_13_numeric/
 date: 2017-01-13 10:46:00 +0800
 description: runoob_13_numeric
 img: post-5.jpg

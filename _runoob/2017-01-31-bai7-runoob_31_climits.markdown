@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_31_climits
+permalink: /runoob/runoob_31_climits/
 date: 2017-01-31 11:02:00 +0800
 description: runoob_31_climits
 img: post-5.jpg

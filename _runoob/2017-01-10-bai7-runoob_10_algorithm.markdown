@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_10_algorithm
+permalink: /runoob/runoob_10_algorithm/
 date: 2017-01-10 10:42:00 +0800
 description: runoob_10_algorithm
 img: post-6.jpg

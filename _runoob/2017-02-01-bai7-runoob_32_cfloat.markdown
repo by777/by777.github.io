@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_32_cfloat
+permalink: /runoob/runoob_32_cfloat/
 date: 2017-02-01 11:03:00 +0800
 description: runoob_32_cfloat
 img: post-5.jpg

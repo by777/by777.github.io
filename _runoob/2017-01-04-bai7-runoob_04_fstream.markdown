@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_04_fstream
+permalink: /runoob/runoob_04_fstream/
 date: 2017-01-04 10:37:00 +0800
 description: runoob_04_fstream
 img: post-3.jpg

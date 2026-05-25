@@ -1,6 +1,7 @@
 ---
 layout: post
 title: runoob_07_vector
+permalink: /runoob/runoob_07_vector/
 date: 2017-01-07 10:40:00 +0800
 description: runoob_07_vector
 img: post-3.jpg
